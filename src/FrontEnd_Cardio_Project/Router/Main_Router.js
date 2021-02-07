@@ -31,8 +31,8 @@ export default function MainRouter() {
                         <SignIn></SignIn>
                     </Route>
                     <Route exact path="/listpatients">
-                        <Main_AppBar/>
-                      
+                        <Main_AppBar />
+
                     </Route>
                     <Route exact path="/register">
                         <Register></Register>

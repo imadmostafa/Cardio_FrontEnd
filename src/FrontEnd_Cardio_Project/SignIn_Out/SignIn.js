@@ -41,7 +41,7 @@ const useStyles = makeStyles((theme) => ({
         backgroundColor: theme.palette.secondary.main,
     },
     form: {
-        width: '100%', 
+        width: '100%',
         marginTop: theme.spacing(1),
     },
     submit: {
@@ -119,7 +119,7 @@ export default function SignIn() {
 
         setOpen(false);
     };
-//end of snack functions to show error message 
+    //end of snack functions to show error message 
 
 
 
@@ -189,7 +189,7 @@ export default function SignIn() {
               </Button>
                             </Grid>
 
-                        
+
                         </Grid>
                     </form>
                 </div>

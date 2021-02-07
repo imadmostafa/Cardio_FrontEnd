@@ -15,138 +15,138 @@ import MuiAlert from '@material-ui/lab/Alert';
 import Graph from './Graph';
 
 function Alert(props) {
-  return <MuiAlert elevation={6} variant="filled" {...props} />;
+    return <MuiAlert elevation={6} variant="filled" {...props} />;
 }
 
 
 const useStyles = makeStyles((theme) => ({
-  seeMore: {
-    marginTop: theme.spacing(3),
-  },
+    seeMore: {
+        marginTop: theme.spacing(3),
+    },
 }));
 
 
 export default function ListPatients(props) {
-  const classes = useStyles();
-  const [bills_undone, setBillsUnDone] = useState([]);
-  const [searchbar, setSearchBar] = useState(props.searchvalue);//for searching the customers
-const[patients,setPatients]=useState(null);
-const[id_chosen,setId_Chosen]=useState(null);
-const[patient_events,setPatient_Events]=useState(null);//fetched from backend
-const[chosenpatient,setChosenPatient]=useState(null);
+    const classes = useStyles();
+    const [bills_undone, setBillsUnDone] = useState([]);
+    const [searchbar, setSearchBar] = useState(props.searchvalue);//for searching the customers
+    const [patients, setPatients] = useState(null);
+    const [id_chosen, setId_Chosen] = useState(null);
+    const [patient_events, setPatient_Events] = useState(null);//fetched from backend
+    const [chosenpatient, setChosenPatient] = useState(null);
 
 
-  function fetchpatients() {
-    API.getAllPatients().then(res => {
-      const result = res.data;
-      console.log("RESULT: ", result);
+    function fetchpatients() {
+        API.getAllPatients().then(res => {
+            const result = res.data;
+            console.log("RESULT: ", result);
 
-      if (res.data.success == false) {
-        alert('failed delete');
-      } else {
+            if (res.data.success == false) {
+                alert('failed delete');
+            } else {
 
-        setPatients(res.data.patients);
+                setPatients(res.data.patients);
 
-        //  handleClick();//for snack bar
-      }
-    }).catch(error => console.log("error", error));
-  }//end of fetchpatients
-
-
-  useEffect(() => {
-    fetchpatients();
-  }, []);
-
-  function getrecord_byid(id) {
-      const idtosend=id;
-    console.log(idtosend);
-    API.getRecordsById(idtosend).then(res => {
-      const result = res.data;
-      console.log("RESULT: ", result);
-
-      if (res.data.success == false) {
-        alert('failed delete');
-      } else {
-        setPatient_Events(res.data.events);
-      }
-    }).catch(error => console.log("error", error));
-  }//end of approve bill method
-
-
-
-
-  return (
-
-    <React.Fragment>
-      <Title>Data of Patients</Title>
-      <Table size="small">
-        <TableHead>
-          <TableRow
-         
-          
-          >
-            <TableCell>id</TableCell>
-            <TableCell>name</TableCell>
-            <TableCell>DateofBirth</TableCell>
-            <TableCell>StartTime</TableCell>
-            <TableCell>EndTime</TableCell>
-            <TableCell>DeviceNumber</TableCell>
-            <TableCell>EventsCount</TableCell>
-
-          </TableRow>
-        </TableHead>
-        <TableBody>
-            {
-                patients?( 
-                    patients.filter(name => name.name.includes(props.searchvalue)).map((row) => (
-                    <TableRow 
-                    hover
-                    onClick={()=>{
-                        setChosenPatient(row);
-                        var idchosen = row.id;
-                        getrecord_byid(idchosen);
-                    }}
-                    key={row.id} >
-                     
-                     <TableCell>{row.id}</TableCell>
-                     <TableCell>{row.name}</TableCell>
-                      <TableCell>{row.date_of_birth}</TableCell>
-                      <TableCell>{row.start_time}</TableCell>
-                      <TableCell>{row.end_time}</TableCell>
-                      <TableCell>{row.serialnumber}</TableCell>
-                      <TableCell>{row.events_count}</TableCell>
-                      
-        
-        
-                    </TableRow>
-                  ))):(<div></div>)
+                //  handleClick();//for snack bar
             }
-         
-        </TableBody>
-      </Table>
-      <div className={classes.seeMore}>
+        }).catch(error => console.log("error", error));
+    }//end of fetchpatients
 
 
-      </div>
-      {
-          patient_events?(  
-          <Graph
-            patient={chosenpatient}  
-             events={patient_events}
-             />
-             
-             ):
-             (
-             <div>
-                 
-             </div>
-             )
-      }
+    useEffect(() => {
+        fetchpatients();
+    }, []);
 
-      
-    </React.Fragment>
+    function getrecord_byid(id) {
+        const idtosend = id;
+        console.log(idtosend);
+        API.getRecordsById(idtosend).then(res => {
+            const result = res.data;
+            console.log("RESULT: ", result);
 
-  );
+            if (res.data.success == false) {
+                alert('failed delete');
+            } else {
+                setPatient_Events(res.data.events);
+            }
+        }).catch(error => console.log("error", error));
+    }//end of approve bill method
+
+
+
+
+    return (
+
+        <React.Fragment>
+            <Title>Data of Patients</Title>
+            <Table size="small">
+                <TableHead>
+                    <TableRow
+
+
+                    >
+                        <TableCell>id</TableCell>
+                        <TableCell>name</TableCell>
+                        <TableCell>DateofBirth</TableCell>
+                        <TableCell>StartTime</TableCell>
+                        <TableCell>EndTime</TableCell>
+                        <TableCell>DeviceNumber</TableCell>
+                        <TableCell>EventsCount</TableCell>
+
+                    </TableRow>
+                </TableHead>
+                <TableBody>
+                    {
+                        patients ? (
+                            patients.filter(name => name.name.includes(props.searchvalue)).map((row) => (
+                                <TableRow
+                                    hover
+                                    onClick={() => {
+                                        setChosenPatient(row);
+                                        var idchosen = row.id;
+                                        getrecord_byid(idchosen);
+                                    }}
+                                    key={row.id} >
+
+                                    <TableCell>{row.id}</TableCell>
+                                    <TableCell>{row.name}</TableCell>
+                                    <TableCell>{row.date_of_birth}</TableCell>
+                                    <TableCell>{row.start_time}</TableCell>
+                                    <TableCell>{row.end_time}</TableCell>
+                                    <TableCell>{row.serialnumber}</TableCell>
+                                    <TableCell>{row.events_count}</TableCell>
+
+
+
+                                </TableRow>
+                            ))) : (<div></div>)
+                    }
+
+                </TableBody>
+            </Table>
+            <div className={classes.seeMore}>
+
+
+            </div>
+            {
+                patient_events ? (
+                    <Graph
+                        patient={chosenpatient}
+                        events={patient_events}
+                    />
+
+                ) :
+                    (
+                        <div>
+
+                        </div>
+                    )
+            }
+
+
+        </React.Fragment>
+
+    );
 }
 
 
