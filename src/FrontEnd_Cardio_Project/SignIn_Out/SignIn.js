@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
         height: '100vh',
     },
     image: {
-        backgroundImage: `url(${process.env.PUBLIC_URL + '/assets/internet-1593358_1920.jpg'})`,
+        backgroundImage: `url(${process.env.PUBLIC_URL + '/CD_Heart-Vector.png'})`,
         backgroundRepeat: 'no-repeat',
         backgroundColor:
             theme.palette.type === 'light' ? theme.palette.grey[50] : theme.palette.grey[900],
@@ -56,6 +56,7 @@ function Alert(props) {
 //
 
 export default function SignIn() {
+    
     const classes = useStyles();
     const history = useHistory();
 

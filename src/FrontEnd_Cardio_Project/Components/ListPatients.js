@@ -27,6 +27,7 @@ const useStyles = makeStyles((theme) => ({
 
 
 export default function ListPatients(props) {
+    
     const classes = useStyles();
     const [bills_undone, setBillsUnDone] = useState([]);
     const [searchbar, setSearchBar] = useState(props.searchvalue);//for searching the customers
@@ -37,7 +38,7 @@ export default function ListPatients(props) {
 
 
     function fetchpatients() {
-        API.getAllPatients().then(res => {
+        API.getAllPatients_ASP().then(res => {
             const result = res.data;
             console.log("RESULT: ", result);
 
@@ -45,9 +46,8 @@ export default function ListPatients(props) {
                 alert('failed delete');
             } else {
 
-                setPatients(res.data.patients);
+                setPatients(res.data);
 
-                //  handleClick();//for snack bar
             }
         }).catch(error => console.log("error", error));
     }//end of fetchpatients
@@ -60,14 +60,14 @@ export default function ListPatients(props) {
     function getrecord_byid(id) {
         const idtosend = id;
         console.log(idtosend);
-        API.getRecordsById(idtosend).then(res => {
+        API.getRecordsById_ASP(idtosend).then(res => {
             const result = res.data;
             console.log("RESULT: ", result);
 
             if (res.data.success == false) {
                 alert('failed delete');
             } else {
-                setPatient_Events(res.data.events);
+                setPatient_Events(res.data);
             }
         }).catch(error => console.log("error", error));
     }//end of approve bill method
@@ -110,11 +110,11 @@ export default function ListPatients(props) {
 
                                     <TableCell>{row.id}</TableCell>
                                     <TableCell>{row.name}</TableCell>
-                                    <TableCell>{row.date_of_birth}</TableCell>
-                                    <TableCell>{row.start_time}</TableCell>
-                                    <TableCell>{row.end_time}</TableCell>
-                                    <TableCell>{row.serialnumber}</TableCell>
-                                    <TableCell>{row.events_count}</TableCell>
+                                    <TableCell>{row.dateOfBirth}</TableCell>
+                                    <TableCell>{row.startTime}</TableCell>
+                                    <TableCell>{row.endTime}</TableCell>
+                                    <TableCell>{row.device.serialnumber}</TableCell>
+                                    <TableCell>{row.events_Count}</TableCell>
 
 
 

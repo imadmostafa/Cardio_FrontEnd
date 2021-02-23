@@ -9,7 +9,7 @@ import {
 const Graph = (props) => {
 
 
-    const [arrayofevents, setArrayOfEvents] = useState(props.events);
+    const [arrayofevents, setArrayOfEvents] = useState(props.events[0].eventRecords);
     const [averageBPM, setAveragBPM] = useState('');
     const [minBPM, setMinBPM] = useState('');
     const [maxBPM, setMaxBPM] = useState('');
@@ -17,7 +17,7 @@ const Graph = (props) => {
     const [arrayDates, setArrayDates] = useState([]);
 
     function calculateBPMs() {
-        setArrayOfEvents(props.events);
+        setArrayOfEvents(props.events[0].eventRecords);
         let array_bpm = [];
         let sum = 0;
         let array_dates = [];
@@ -88,5 +88,5 @@ const Graph = (props) => {
         </div>
     );
 }
-// /[43934, 52503, 57177, 69658, 97031, 119931, 137133, 154175]
+
 export default withHighcharts(Graph, Highcharts);
